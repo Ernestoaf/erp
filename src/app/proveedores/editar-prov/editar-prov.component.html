@@ -1,0 +1,82 @@
+<div class="col-md-12">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="/inicio">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/compras">Compras</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/listado-proveedores">Proveedores</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Editar proveedores</li>
+    </ol>
+  </nav>
+</div>
+<div class="col-md-12 titulo">
+  <span>Editar Proveedor</span>
+  <button class="btn btn-primary" routerLink="/listado-proveedores">
+    Volver
+  </button>
+</div>
+
+<div class="col-md-12">
+<div class="col-md-8 offset-md-2 col-12">
+  <div class="formulario">
+    <!-- Cuando le demos a enviar ejecutara el metodo guardarProv -->
+    <form [formGroup]="proveedorForm" (ngSubmit)="editarProv()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="proveedor.nombre">
+      </div>
+      <div class="form-group">
+        <label for="cif">CIF</label>
+        <input type="text" class="form-control" placeholder="Cif" formControlName="cif" [(ngModel)]="proveedor.cif">
+      </div>
+      <div class="form-group">
+        <label for="direccion">Domicilio</label>
+        <input type="text" class="form-control" formControlName="domicilio" [(ngModel)]="proveedor.domicilio">
+      </div>
+      <div class="form-group">
+        <label for="cp">Código Postal</label>
+        <input type="number" class="form-control" formControlName="cp" [(ngModel)]="proveedor.cp">
+      </div>
+      <div class="form-group">
+        <label for="localidad">Localidad</label>
+        <input type="text" class="form-control" formControlName="localidad" [(ngModel)]="proveedor.localidad">
+      </div>
+      <div class="form-group">
+        <label for="provincia">Provincia</label>
+        <select type="text" class="form-control" formControlName="provincia" [(ngModel)]="proveedor.provincia">
+          <!-- property vicding [] quiere decir   que no es texto si no que va a ser una expresion javascript -->
+          <!-- si es objeto se pone ngValue, string y demas value a secas -->
+          <option *ngFor="let p of provincias" [ngValue]="p">
+            {{p}}</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" class="form-control" formControlName="telefono" [(ngModel)]="proveedor.telefono">
+      </div>
+      <div class="form-group">
+        <label for="mail">Mail</label>
+        <input  type="email" class="form-control" formControlName="email" email [(ngModel)]="proveedor.email">
+      </div>
+      <div class="form-group">
+        <label for="contacto">Contacto</label>
+        <input type="text" class="form-control" formControlName="contacto" [(ngModel)]="proveedor.contacto">
+      </div>
+      <button class="btn btn-primary">
+        <span>Guardar Cambios</span>
+        <!-- <span *ngIf="enviando"><i class="fa fa-spinner fa-pulse"></i></span>< -->
+      </button>
+      <button routerLink="/listado-proveedores" class="btn btn-danger">Cancelar</button>
+    </form>
+    <!-- con [@alerta ] definimos el nombre de animacion-->
+    <!-- <p class="alert alert-warning" [@alerta]="estadoAlerta">
+      {{mensaje}}
+    </p> -->
+  </div>
+</div>

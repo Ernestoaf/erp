@@ -1,0 +1,96 @@
+<div class="col-md-12">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="/inicio">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/compras">Compras</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/listado-proveedores">Proveedores</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Añadir proveedores</li>
+    </ol>
+  </nav>
+</div>
+<div class="col-md-12 titulo">
+  <span>Proveedores</span>
+  <button class="btn btn-primary" routerLink="/listado-proveedores">
+    Volver
+  </button>
+</div>
+
+<div class="col-md-12">
+  <table class="table table-bordered tabled-striped">
+    <tr>
+      <th>Nombre</th>
+      <th>CIF</th>
+      <th>Localidad</th>
+    </tr>
+    <tr *ngFor="let p of proveedores">
+      <td>{{p.nombre}}</td>
+      <td>{{p.cif}}</td>
+      <td>{{p.localidad}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="col-md-8 offset-md-2 col-12">
+  <div class="formulario">
+    <!-- Cuando le demos a enviar ejecutara el metodo guardarProv -->
+    <form [formGroup]="proveedorForm" (ngSubmit)="crearProv()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" >
+      </div>
+      <div class="form-group">
+        <label for="cif">CIF</label>
+        <input type="text" class="form-control" placeholder="Cif" formControlName="cif" #cif>
+      </div>
+      <div class="form-group">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" class="form-control" formControlName="domicilio">
+      </div>
+      <div class="form-group">
+        <label for="cp">Código Postal</label>
+        <input type="number" class="form-control" formControlName="cp">
+      </div>
+      <div class="form-group">
+        <label for="localidad">Localidad</label>
+        <input type="text" class="form-control" formControlName="localidad">
+      </div>
+      <div class="form-group">
+        <label for="provincia">Provincia</label>
+        <select type="text" class="form-control" formControlName="provincia">
+          <!-- property vicding [] quiere decir   que no es texto si no que va a ser una expresion javascript -->
+          <option *ngFor="let p of provincias" [value]="p">
+            {{p}}</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" class="form-control" formControlName="telefono">
+      </div>
+      <div class="form-group">
+        <label for="mail">Mail</label>
+        <input  type="email" class="form-control" formControlName="email" email>
+      </div>
+      <div class="form-group">
+        <label for="contacto">Contacto</label>
+        <input type="text" class="form-control" formControlName="contacto">
+      </div>
+      <button class="btn btn-primary">
+        <span *ngIf="!enviando">Añadir Proveedor</span>
+        <span *ngIf="enviando"><i class="fa fa-spinner fa-pulse"></i></span>
+        <span></span>
+      </button>
+      <button routerLink="/listado-proveedores" class="btn btn-danger">Cancelar</button>
+    </form>
+    <!-- con [@alerta ] definimos el nombre de animacion-->
+    <p class="alert alert-warning" [@alerta]="estadoAlerta">
+      {{mensaje}}
+    </p>
+  </div>
+</div>
